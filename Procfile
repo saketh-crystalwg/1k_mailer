@@ -1,0 +1,1 @@
+worker: python 1k_mailer.py
