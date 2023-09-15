@@ -43,7 +43,7 @@ base_4 as ( \
 select *, ROW_NUMBER()over(PARTITION by customer_fk order by txn_date asc) as 1k_date  from base_3 \
 where total_dpst >= 1000) \
 \
-select a.customer_fk, c.name as merchant_name,  b.email , txn_date as date_of_reaching_1k from base_4 as a \
+select a.customer_fk, c.name as merchant_name, txn_date as date_of_reaching_1k from base_4 as a \
 left join platform.customers as b \
 on a.customer_fk = b.id \
 left join platform.merchants as c \
@@ -51,7 +51,6 @@ on b.merchant_fk = c.id \
 where 1k_date = 1 \
 order by txn_date", con=connection)
 
-Depositors_1k['email'] = Depositors_1k['email'].str.decode("utf-8")
 
 date = dt.datetime.today()-  timedelta(1)
 date_1 = date.strftime("%m-%d-%Y")
