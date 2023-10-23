@@ -96,6 +96,6 @@ def send_mail(send_from,send_to,subject,text,server,port,username='',password=''
 subject = sub
 body = f"Hi,\n\n Attached contains list of VIP customers as of {date_1}\n\nThanks,\nSaketh"
 sender = "sakethg250@gmail.com"
-recipients = ["alberto@crystalwg.com","saketh@crystalwg.com",'marcos@crystalwg.com','anna.penkova@1clickgames.com','camila@crystalwg.com']
+recipients = ["alberto@crystalwg.com","saketh@crystalwg.com",'marcos@crystalwg.com','anna.penkova@1clickgames.com']
 password = "ztrgzuxuzwbgfskf"
 send_mail(sender, recipients, subject, body, "smtp.gmail.com", 465,sender,password)
