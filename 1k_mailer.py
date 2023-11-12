@@ -40,10 +40,10 @@ select customer_fk, txn_date,deposits, \
 sum(deposits) over ( PARTITION by customer_fk order by txn_date asc ) as total_dpst from base_2), \
 \
 base_4 as ( \
-select *, ROW_NUMBER()over(PARTITION by customer_fk order by txn_date asc) as 1k_date  from base_3 \
-where total_dpst >= 1000) \
+select *, ROW_NUMBER()over(PARTITION by customer_fk order by txn_date asc) as 750_date  from base_3 \
+where total_dpst >= 750) \
 \
-select a.customer_fk, c.name as merchant_name,d.country_desc as country, txn_date as date_of_reaching_1k, \
+select a.customer_fk, c.name as merchant_name,d.country_desc as country, txn_date as date_of_reaching_750, \
 case when b.email like '%blocked%' then 1 else 0 end as is_blocked from base_4 as a \
 left join platform.customers as b \
 on a.customer_fk = b.id \
@@ -51,7 +51,7 @@ left join platform.merchants as c \
 on b.merchant_fk = c.id \
 left join platform.countries d \
 on b.country_fk = d.id \
-where 1k_date = 1 \
+where 750_date = 1 \
 order by txn_date", con=connection)
 
 
